@@ -4,22 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Winyates Edition</title>
-<meta name="description" content="The Winyates Edition - Arcade, Racing, Sports, and Classic Games.">
+<meta name="description" content="The Winyates Edition - Unblocked Arcade, Racing, Sports, and Action Games.">
 
 <!-- Embedded SVG Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50,90 Q40,80 50,70 T50,50 T50,30' stroke='%23ff9900' stroke-width='6' fill='none'/><path d='M30,75 Q70,75 50,60 T30,45 T70,30' stroke='%233388ff' stroke-width='8' fill='none'/><path d='M20,40 Q80,40 50,20' stroke='%238800cc' stroke-width='10' fill='none'/><text x='50' y='42' font-family='Arial Black, sans-serif' font-size='42' fill='%23ffaa00' stroke='%23442200' stroke-width='2' text-anchor='middle'>W</text></svg>">
 
 <style>
 :root {
-    --bg: #0f1117;
-    --card: #161922;
-    --card-hover: #1f2330;
+    --bg: #0b0d12;
+    --card: #131722;
+    --card-hover: #1c2130;
     --text: #f0f3f8;
     --muted: #8a94a6;
     --border: rgba(255, 255, 255, 0.08);
     --accent: #6366f1;
-    --accent-glow: rgba(99, 102, 241, 0.3);
-    --header: rgba(15, 17, 23, 0.85);
+    --accent-glow: rgba(99, 102, 241, 0.35);
+    --header: rgba(11, 13, 18, 0.9);
     --gradient-1: #6366f1;
     --gradient-2: #a855f7;
 }
@@ -31,7 +31,7 @@ body.light {
     --text: #0f172a;
     --muted: #64748b;
     --border: rgba(0, 0, 0, 0.08);
-    --header: rgba(244, 246, 251, 0.85);
+    --header: rgba(244, 246, 251, 0.9);
 }
 
 * {
@@ -86,7 +86,7 @@ header {
     font-size: 20px;
     font-weight: 800;
     letter-spacing: -0.5px;
-    background: linear-gradient(135deg, #ffb703, #fb8500, #7000ff);
+    background: linear-gradient(135deg, #ffb703, #fb8500, #a855f7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     white-space: nowrap;
@@ -149,7 +149,7 @@ header {
 /* NAV */
 .nav-container {
     border-top: 1px solid var(--border);
-    background: rgba(0,0,0,0.1);
+    background: rgba(0,0,0,0.15);
 }
 
 .nav {
@@ -489,7 +489,6 @@ header {
 <header>
     <div class="header-inner">
         <a href="#" class="brand">
-            <!-- Winyates Custom SVG Logo -->
             <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M50,90 Q35,80 50,68 T50,48 T50,28" stroke="#ff8c00" stroke-width="5" fill="none" stroke-linecap="round"/>
                 <path d="M25,75 Q75,75 50,58 T25,42 T75,25" stroke="#3b82f6" stroke-width="7" fill="none" stroke-linecap="round"/>
@@ -524,7 +523,7 @@ header {
 <section class="hero">
     <div>
         <h1>Welcome to Winyates Arcade</h1>
-        <p>Instant browser playable games—no setup needed.</p>
+        <p>School-unblocked, high-performance HTML5 games—no ads or blocked embeds.</p>
     </div>
     <div class="badge"><span id="gameCount">0</span> Games Available</div>
 </section>
@@ -576,29 +575,42 @@ header {
 
 <script>
 /* =========================
-   WORKING GAME DATABASE 
-   (Uses Reliable HTML5 Web Embeds)
+   AD-FREE & UNBLOCKED GITHUB RAW SOURCES
 ========================= */
 const games = [
-    // POPULAR & ARCADE
-    ["Slope", "Popular", "https://kripdev.github.io/slope/", "▲"],
-    ["Geometry Dash", "Popular", "https://scratch.mit.edu/projects/105500895/embed", "◆"],
-    ["2048", "Arcade", "https://play2048.co/", "🔢"],
-    ["Flappy Bird", "Arcade", "https://flappybird.io/", "🐦"],
-    ["Pac-Man", "Arcade", "https://freepacman.org/", "🟡"],
-    ["Snake", "Arcade", "https://playsnake.org/", "🐍"],
-    ["Tetris", "Arcade", "https://chvin.github.io/react-tetris/", "🧱"],
-    ["Space Invaders", "Arcade", "https://freeinvaders.org/", "👾"],
+    // POPULAR
+    ["Slope", "Popular", "https://the-pizza-editionfree.github.io/games/slope/", "▲"],
+    ["Retro Bowl", "Popular", "https://the-pizza-editionfree.github.io/games/retro-bowl/", "🏈"],
+    ["1v1.LOL", "Popular", "https://the-pizza-editionfree.github.io/games/1v1-lol/", "🔫"],
+    ["BitLife", "Popular", "https://the-pizza-editionfree.github.io/games/bitlife/", "💼"],
+
+    // RACING & DRIVING
+    ["Highway Racer 3D", "Racing", "https://the-pizza-editionfree.github.io/games/highway-racer-3d/", "🏎"],
+    ["Moto X3M", "Racing", "https://the-pizza-editionfree.github.io/games/moto-x3m/", "🏍"],
+    ["Drift Hunters", "Racing", "https://the-pizza-editionfree.github.io/games/drift-hunters/", "🚗"],
+    ["Madalin Stunt Cars 2", "Racing", "https://the-pizza-editionfree.github.io/games/madalin-stunt-cars-2/", "🚘"],
+    ["Drive Mad", "Racing", "https://the-pizza-editionfree.github.io/games/drive-mad/", "🛻"],
+
+    // ACTION
+    ["Vex 3", "Action", "https://ubg365.github.io/vex-3/", "⚡"],
+    ["Vex 7", "Action", "https://the-pizza-editionfree.github.io/games/vex-7/", "⚡"],
+    ["Stickman Hook", "Action", "https://the-pizza-editionfree.github.io/games/stickman-hook/", "🪝"],
+    ["Getaway Shootout", "Action", "https://the-pizza-editionfree.github.io/games/getaway-shootout/", "💥"],
+    ["Rooftop Snipers", "Action", "https://the-pizza-editionfree.github.io/games/rooftop-snipers/", "🎯"],
+
+    // ARCADE
+    ["Crossy Road", "Arcade", "https://the-pizza-editionfree.github.io/games/crossy-road/", "🐔"],
+    ["Cookie Clicker", "Arcade", "https://the-pizza-editionfree.github.io/games/cookie-clicker/", "🍪"],
+    ["Doodle Jump", "Arcade", "https://the-pizza-editionfree.github.io/games/doodle-jump/", "🟢"],
+    ["Pac-Man", "Arcade", "https://the-pizza-editionfree.github.io/games/pacman/", "🟡"],
+    ["Snake (Google)", "Arcade", "https://the-pizza-editionfree.github.io/games/google-snake/", "🐍"],
 
     // SPORTS & 2 PLAYER
-    ["Retro Bowl", "Sports", "https://game316013.konggames.com/gamez/0031/6013/live/index.html", "🏈"],
-    ["Tic Tac Toe (2P)", "2 Player", "https://playtictactoe.org/", "❌"],
-    ["Chess", "2 Player", "https://www.chess.com/play/computer", "♟"],
-
-    // ACTION & RACING
-    ["Paper.io 2", "Action", "https://paper-io.com/", "📜"],
-    ["Hextris", "Action", "https://hextris.io/", "⬡"],
-    ["Vex 3", "Action", "https://vex3.org/", "⚡"]
+    ["Basket Random", "Sports", "https://the-pizza-editionfree.github.io/games/basket-random/", "🏀"],
+    ["Soccer Random", "2 Player", "https://the-pizza-editionfree.github.io/games/soccer-random/", "⚽"],
+    ["Basketball Stars", "Sports", "https://the-pizza-editionfree.github.io/games/basketball-stars/", "🏀"],
+    ["Boxing Random", "2 Player", "https://the-pizza-editionfree.github.io/games/boxing-random/", "🥊"],
+    ["Fireboy & Watergirl 1", "2 Player", "https://the-pizza-editionfree.github.io/games/fireboy-and-watergirl-1/", "🔥"]
 ];
 
 let category = "All Games";
