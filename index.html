@@ -3,217 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offline HTML5 Arcade</title>
+<title>The Winyates Edition — Web Arcade</title>
 <style>
-    :root {
-        --bg-color: #0f172a;
-        --card-bg: #1e293b;
-        --accent-color: #3b82f6;
-        --text-color: #f8fafc;
-        --text-muted: #94a3b8;
-    }
+:root {
+    --bg: #0b0e14;
+    --card: #151922;
+    --card-hover: #1e2430;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
-    
-    header { background-color: var(--card-bg); padding: 1rem 2rem; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
-    h1 { font-size: 1.5rem; font-weight: 700; color: var(--accent-color); }
-    
-    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; width: 100%; flex: 1; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
-    
-    .card { background-color: var(--card-bg); border-radius: 8px; border: 1px solid #334155; overflow: hidden; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
-    .card:hover { transform: translateY(-4px); border-color: var(--accent-color); }
-    .card-body { padding: 1.25rem; }
-    .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .card-desc { font-size: 0.875rem; color: var(--text-muted); }
-    
-    .modal { display: none; position: fixed; inset: 0; background-color: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; padding: 1rem; }
-    .modal.active { display: flex; }
-    .modal-content { background-color: var(--card-bg); border-radius: 8px; width: 100%; max-width: 640px; border: 1px solid #334155; display: flex; flex-direction: column; overflow: hidden; }
-    .modal-header { padding: 1rem; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
-    .close-btn { background: none; border: none; color: var(--text-color); font-size: 1.5rem; cursor: pointer; }
-    
-    .game-viewport { width: 100%; height: 400px; background-color: #000; display: flex; justify-content: center; align-items: center; }
-    canvas { background-color: #000; display: block; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+header { position: sticky; top: 0; z-index: 100; background: rgba(11, 14, 20, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 20px; font-weight: 800; background: linear-gradient(135deg, #ff9900, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.search-box input { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; border-radius: 8px; width: 250px; outline: none; }
+.search-box input:focus { border-color: var(--accent); }
+
+.container { max-width: 1400px; margin: auto; padding: 24px; width: 100%; flex: 1; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 20px; }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.2s; }
+.card:hover { transform: translateY(-4px); border-color: var(--accent); background: var(--card-hover); }
+.card-title { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+.card-tag { font-size: 12px; color: var(--muted); }
+
+/* PAGINATION */
+.pagination { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+.page-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 6px; cursor: pointer; }
+.page-btn.active { background: var(--accent); border-color: transparent; }
+
+/* MODAL DISPLAY */
+.modal { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.9); flex-direction: column; padding: 16px; }
+.modal.open { display: flex; }
+.modal-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.close-btn { background: #ef4444; color: white; border: 0; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.game-viewport { flex: 1; width: 100%; height: 100%; border: 0; background: #000; border-radius: 8px; }
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Offline Canvas Arcade</h1>
+    <div class="logo">Winyates Edition</div>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search titles..." oninput="filterGames()">
+    </div>
 </header>
 
 <main class="container">
-    <div class="grid">
-        <div class="card" onclick="launchGame('snake')">
-            <div class="card-body">
-                <div class="card-title">Classic Snake</div>
-                <div class="card-desc">Navigate the grid, collect food, and avoid colliding with walls or yourself.</div>
-            </div>
-        </div>
-        <div class="card" onclick="launchGame('pong')">
-            <div class="card-body">
-                <div class="card-title">Pong Solo</div>
-                <div class="card-desc">Keep the ball in play using the paddle and score points against the wall.</div>
-            </div>
-        </div>
-    </div>
+    <h2>Client-Rendered Game Engine</h2>
+    <div id="gameGrid" class="grid"></div>
+    <div id="pagination" class="pagination"></div>
 </main>
 
 <div id="gameModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2 id="modalTitle">Game</h2>
-            <button class="close-btn" onclick="closeGame()">&times;</button>
-        </div>
-        <div class="game-viewport">
-            <canvas id="gameCanvas" width="600" height="380"></canvas>
-        </div>
+    <div class="modal-bar">
+        <h3 id="modalTitle">Game View</h3>
+        <button class="close-btn" onclick="closeGame()">Close Game ✕</button>
     </div>
+    <iframe id="gameFrame" class="game-viewport" allow="autoplay; gamepad; fullscreen" sandbox="allow-scripts allow-same-origin"></iframe>
 </div>
 
 <script>
-let currentGameLoop = null;
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-
-function launchGame(gameType) {
-    document.getElementById('gameModal').classList.add('active');
-    if (currentGameLoop) clearInterval(currentGameLoop);
-    
-    if (gameType === 'snake') {
-        document.getElementById('modalTitle').textContent = 'Classic Snake';
-        runSnake();
-    } else if (gameType === 'pong') {
-        document.getElementById('modalTitle').textContent = 'Pong Solo';
-        runPong();
+// NATIVE INLINE GAMES (Resolves CORS and eliminates external 404 dependencies)
+const CATALOG = [
+    {
+        title: "Pong Engine",
+        category: "Arcade",
+        code: `<!DOCTYPE html><html><body style="margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;"><canvas id="c" width="600" height="400"></canvas><script>const c=document.getElementById('c'),x=c.getContext('2d');let py=160,by=200,bx=300,dx=4,dy=4;c.onmousemove=e=>py=e.clientY-c.getBoundingClientRect().top-40;setInterval(()=>{bx+=dx;by+=dy;if(by<0||by>400)dy=-dy;if(bx>600)dx=-dx;if(bx<20&&by>py&&by<py+80)dx=-dx;if(bx<0){bx=300;by=200;}x.fillStyle='#000';x.fillRect(0,0,600,400);x.fillStyle='#fff';x.fillRect(10,py,10,80);x.beginPath();x.arc(bx,by,6,0,7);x.fill();},1000/60);<\/script><\/html>`
+    },
+    {
+        title: "Canvas Snake",
+        category: "Classic",
+        code: `<!DOCTYPE html><html><body style="margin:0;background:#111;display:flex;justify-content:center;align-items:center;height:100vh;"><canvas id="c" width="400" height="400"></canvas><script>const c=document.getElementById('c'),x=c.getContext('2d');let s=[{x:10,y:10}],f={x:15,y:10},dx=1,dy=0;document.onkeydown=e=>{if(e.key==='ArrowUp'&&dy===0){dx=0;dy=-1;}if(e.key==='ArrowDown'&&dy===0){dx=0;dy=1;}if(e.key==='ArrowLeft'&&dx===0){dx=-1;dy=0;}if(e.key==='ArrowRight'&&dx===0){dx=1;dy=0;}};setInterval(()=>{let h={x:s[0].x+dx,y:s[0].y+dy};if(h.x<0||h.x>=20||h.y<0||h.y>=20){s=[{x:10,y:10}];dx=1;dy=0;return;}s.unshift(h);if(h.x===f.x&&h.y===f.y){f={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};}else{s.pop();}x.fillStyle='#111';x.fillRect(0,0,400,400);x.fillStyle='red';x.fillRect(f.x*20,f.y*20,18,18);x.fillStyle='lime';s.forEach(p=>x.fillRect(p.x*20,p.y*20,18,18));},120);<\/script><\/html>`
     }
+];
+
+let currentPage = 1;
+const itemsPerPage = 8;
+
+function renderGrid() {
+    const grid = document.getElementById("gameGrid");
+    const search = document.getElementById("searchInput").value.toLowerCase();
+    grid.innerHTML = "";
+
+    const filtered = CATALOG.filter(g => g.title.toLowerCase().includes(search));
+    const start = (currentPage - 1) * itemsPerPage;
+    const paginated = filtered.slice(start, start + itemsPerPage);
+
+    paginated.forEach(game => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.onclick = () => loadGame(game);
+        card.innerHTML = `<div class="card-title">${game.title}</div><div class="card-tag">${game.category}</div>`;
+        grid.appendChild(card);
+    });
+
+    renderPagination(filtered.length);
+}
+
+function renderPagination(totalItems) {
+    const pContainer = document.getElementById("pagination");
+    pContainer.innerHTML = "";
+    const pages = Math.ceil(totalItems / itemsPerPage);
+
+    for (let i = 1; i <= pages; i++) {
+        const btn = document.createElement("button");
+        btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+        btn.textContent = i;
+        btn.onclick = () => { currentPage = i; renderGrid(); };
+        pContainer.appendChild(btn);
+    }
+}
+
+function filterGames() {
+    currentPage = 1;
+    renderGrid();
+}
+
+function loadGame(game) {
+    document.getElementById("modalTitle").textContent = game.title;
+    const frame = document.getElementById("gameFrame");
+    frame.srcdoc = game.code;
+    document.getElementById("gameModal").classList.add("open");
 }
 
 function closeGame() {
-    document.getElementById('gameModal').classList.remove('active');
-    if (currentGameLoop) clearInterval(currentGameLoop);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById("gameModal").classList.remove("open");
+    document.getElementById("gameFrame").srcdoc = "";
 }
 
-// --- SNAKE GAME ENGINE ---
-function runSnake() {
-    const gridSize = 20;
-    const tileCountX = canvas.width / gridSize;
-    const tileCountY = canvas.height / gridSize;
-    
-    let snake = [{x: 10, y: 10}];
-    let food = {x: 15, y: 10};
-    let dx = 1, dy = 0;
-    
-    function handleInput(e) {
-        if (e.key === 'ArrowUp' && dy === 0) { dx = 0; dy = -1; }
-        if (e.key === 'ArrowDown' && dy === 0) { dx = 0; dy = 1; }
-        if (e.key === 'ArrowLeft' && dx === 0) { dx = -1; dy = 0; }
-        if (e.key === 'ArrowRight' && dx === 0) { dx = 1; dy = 0; }
-    }
-    
-    document.addEventListener('keydown', handleInput);
-    
-    currentGameLoop = setInterval(() => {
-        const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-        
-        // Wall Collision
-        if (head.x < 0 || head.x >= tileCountX || head.y < 0 || head.y >= tileCountY) {
-            snake = [{x: 10, y: 10}];
-            dx = 1; dy = 0;
-            return;
-        }
-        
-        // Self Collision
-        for (let segment of snake) {
-            if (head.x === segment.x && head.y === segment.y) {
-                snake = [{x: 10, y: 10}];
-                dx = 1; dy = 0;
-                return;
-            }
-        }
-        
-        snake.unshift(head);
-        
-        // Food Collision
-        if (head.x === food.x && head.y === food.y) {
-            food = {
-                x: Math.floor(Math.random() * tileCountX),
-                y: Math.floor(Math.random() * tileCountY)
-            };
-        } else {
-            snake.pop();
-        }
-        
-        // Render
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.fillStyle = '#ef4444';
-        ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
-        
-        ctx.fillStyle = '#22c55e';
-        for (let segment of snake) {
-            ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
-        }
-    }, 100);
-}
-
-// --- PONG GAME ENGINE ---
-function runPong() {
-    let paddleY = canvas.height / 2 - 40;
-    const paddleHeight = 80;
-    const paddleWidth = 10;
-    
-    let ballX = canvas.width / 2;
-    let ballY = canvas.height / 2;
-    let ballSpeedX = 4;
-    let ballSpeedY = 4;
-    
-    function handleMouseMove(e) {
-        const rect = canvas.getBoundingClientRect();
-        paddleY = e.clientY - rect.top - paddleHeight / 2;
-    }
-    
-    canvas.addEventListener('mousemove', handleMouseMove);
-    
-    currentGameLoop = setInterval(() => {
-        ballX += ballSpeedX;
-        ballY += ballSpeedY;
-        
-        // Top/Bottom bounce
-        if (ballY <= 0 || ballY >= canvas.height) ballSpeedY = -ballSpeedY;
-        
-        // Right wall bounce
-        if (ballX >= canvas.width) ballSpeedX = -ballSpeedX;
-        
-        // Paddle collision
-        if (ballX <= paddleWidth + 10 && ballY >= paddleY && ballY <= paddleY + paddleHeight) {
-            ballSpeedX = -ballSpeedX;
-        }
-        
-        // Miss (Reset)
-        if (ballX <= 0) {
-            ballX = canvas.width / 2;
-            ballY = canvas.height / 2;
-            ballSpeedX = 4;
-        }
-        
-        // Render
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.fillStyle = '#3b82f6';
-        ctx.fillRect(10, paddleY, paddleWidth, paddleHeight);
-        
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.arc(ballX, ballY, 8, 0, Math.PI * 2);
-        ctx.fill();
-    }, 1000 / 60);
-}
+renderGrid();
 </script>
 </body>
 </html>
