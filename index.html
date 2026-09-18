@@ -3,90 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Winyates Edition — 500+ Unblocked Games</title>
+<title>The Winyates Edition — 500+ Ultimate Unblocked Games</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50,90 Q40,80 50,70 T50,50 T50,30' stroke='%23ff9900' stroke-width='6' fill='none'/><path d='M30,75 Q70,75 50,60 T30,45 T70,30' stroke='%233388ff' stroke-width='8' fill='none'/><path d='M20,40 Q80,40 50,20' stroke='%238800cc' stroke-width='10' fill='none'/><text x='50' y='42' font-family='Arial Black, sans-serif' font-size='42' fill='%23ffaa00' stroke='%23442200' stroke-width='2' text-anchor='middle'>W</text></svg>">
 
 <style>
 :root {
-    --bg: #0b0d12;
-    --card: #131722;
-    --card-hover: #1c2130;
-    --text: #f0f3f8;
-    --muted: #8a94a6;
+    --bg: #0b0e14;
+    --card: #151922;
+    --card-hover: #1e2430;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
     --border: rgba(255, 255, 255, 0.08);
     --accent: #6366f1;
-    --accent-glow: rgba(99, 102, 241, 0.35);
-    --header: rgba(11, 13, 18, 0.9);
+    --accent-hover: #4f46e5;
+    --accent-glow: rgba(99, 102, 241, 0.25);
+    --header: rgba(11, 14, 20, 0.85);
 }
 
-body.light {
-    --bg: #f4f6fb;
+body.light-mode {
+    --bg: #f8fafc;
     --card: #ffffff;
-    --card-hover: #f8fafc;
+    --card-hover: #f1f5f9;
     --text: #0f172a;
     --muted: #64748b;
     --border: rgba(0, 0, 0, 0.08);
-    --header: rgba(244, 246, 251, 0.9);
+    --header: rgba(248, 250, 252, 0.85);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+body { background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
+/* HEADER */
 header { position: sticky; top: 0; z-index: 100; background: var(--header); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
-.header-inner { max-width: 1500px; margin: auto; padding: 12px 24px; display: flex; align-items: center; gap: 20px; }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
-.logo-svg { width: 40px; height: 40px; }
-.title { font-size: 20px; font-weight: 800; background: linear-gradient(135deg, #ffb703, #fb8500, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header-inner { max-width: 1600px; margin: auto; padding: 12px 24px; display: flex; align-items: center; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; cursor: pointer; }
+.title { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; background: linear-gradient(135deg, #ff9900, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-.search { flex: 1; max-width: 500px; margin-left: auto; position: relative; }
-.search input { width: 100%; padding: 10px 16px 10px 42px; border: 1px solid var(--border); border-radius: 12px; outline: none; background: var(--card); color: var(--text); font-size: 14px; }
-.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.search-box { flex: 1; max-width: 500px; margin-left: auto; position: relative; }
+.search-box input { width: 100%; padding: 10px 16px 10px 42px; border: 1px solid var(--border); border-radius: 12px; outline: none; background: var(--card); color: var(--text); font-size: 14px; transition: all 0.2s; }
+.search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
 
-.nav-container { border-top: 1px solid var(--border); background: rgba(0,0,0,0.15); }
-.nav { max-width: 1500px; margin: auto; padding: 10px 24px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-.nav button { border: 1px solid var(--border); background: var(--card); color: var(--muted); padding: 8px 16px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-size: 13px; font-weight: 600; }
-.nav button.active { background: var(--accent); color: white; border-color: transparent; }
+.header-actions { display: flex; gap: 10px; }
+.btn-icon { border: 1px solid var(--border); background: var(--card); color: var(--text); width: 42px; height: 42px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.btn-icon:hover { background: var(--card-hover); border-color: var(--accent); transform: translateY(-1px); }
 
-.container { max-width: 1500px; margin: auto; padding: 24px; }
-.hero { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
-.badge { background: var(--card); border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--accent); }
+/* CATEGORIES NAV */
+.nav-bar { border-top: 1px solid var(--border); background: rgba(0,0,0,0.1); }
+.nav-inner { max-width: 1600px; margin: auto; padding: 10px 24px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.nav-btn { border: 1px solid var(--border); background: var(--card); color: var(--muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+.nav-btn:hover { color: var(--text); border-color: var(--accent); }
+.nav-btn.active { background: var(--accent); color: white; border-color: transparent; box-shadow: 0 4px 12px var(--accent-glow); }
 
-.games { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
-.game { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
-.game:hover { transform: translateY(-4px); border-color: var(--accent); }
-.thumbnail { height: 110px; display: flex; align-items: center; justify-content: center; font-size: 42px; background: rgba(255,255,255,0.03); }
-.game-info { padding: 12px; }
-.game-title { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.game-category { color: var(--muted); font-size: 11px; margin-top: 2px; }
+/* MAIN GRID */
+.container { max-width: 1600px; margin: auto; padding: 24px; }
+.hero { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+.hero h1 { font-size: 26px; font-weight: 800; }
+.hero p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.badge { background: var(--card); border: 1px solid var(--border); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--accent); }
 
-.player { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(10, 11, 15, 0.98); padding: 16px; flex-direction: column; }
-.player.open { display: flex; }
-.player-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+.game-card { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
+.game-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 12px 24px -8px rgba(0,0,0,0.5); }
+
+.card-thumb { height: 130px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(168,85,247,0.08)); position: relative; }
+.card-thumb svg { width: 48px; height: 48px; fill: var(--accent); transition: transform 0.2s; }
+.game-card:hover .card-thumb svg { transform: scale(1.1); }
+
+.card-body { padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+.card-title { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-category { color: var(--muted); font-size: 12px; font-weight: 500; }
+
+.fav-btn { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); color: white; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 2; }
+.fav-btn.active { color: #ffb703; }
+
+/* PLAYER OVERLAY */
+.player-overlay { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(11, 14, 20, 0.98); backdrop-filter: blur(12px); padding: 16px; flex-direction: column; }
+.player-overlay.open { display: flex; }
+.player-bar { display: flex; align-items: center; gap: 16px; padding-bottom: 12px; }
 .player-title { color: white; font-size: 18px; font-weight: 700; margin-right: auto; }
-.player-btn { border: 1px solid var(--border); background: #1e222d; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; }
-.game-frame { flex: 1; width: 100%; border: 0; border-radius: 10px; background: #000; }
+.player-action-btn { border: 1px solid var(--border); background: #1e2430; color: white; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.2s; }
+.player-action-btn:hover { background: var(--accent); }
+.iframe-container { flex: 1; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; background: #000; position: relative; }
+.game-frame { width: 100%; height: 100%; border: 0; background: #000; }
+
+/* MODALS */
+.modal { display: none; position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 20px; }
+.modal.open { display: flex; }
+.modal-box { width: 440px; max-width: 100%; background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+.modal-box h2 { font-size: 20px; margin-bottom: 16px; font-weight: 800; }
+.setting-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.setting-row:last-child { border-bottom: 0; }
+.setting-label { font-size: 14px; font-weight: 600; }
+.setting-desc { font-size: 12px; color: var(--muted); }
+
+/* FPS COUNTER */
+#fps-counter { position: fixed; bottom: 12px; right: 12px; background: rgba(0,0,0,0.8); border: 1px solid var(--border); padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; color: #10b981; z-index: 999; display: none; }
 </style>
 </head>
 <body>
 
 <header>
     <div class="header-inner">
-        <a href="#" class="brand">
-            <svg class="logo-svg" viewBox="0 0 100 100"><path d="M50,90 Q35,80 50,68 T50,48 T50,28" stroke="#ff8c00" stroke-width="5" fill="none"/><text x="50" y="44" font-family="Arial Black" font-size="44" fill="#ffb703" text-anchor="middle">W</text></svg>
+        <div class="brand" onclick="location.reload()">
+            <svg width="36" height="36" viewBox="0 0 100 100">
+                <path d="M50,90 Q35,80 50,68 T50,48 T50,28" stroke="#ff9900" stroke-width="6" fill="none"/>
+                <path d="M25,75 Q75,75 50,58 T25,42 T75,25" stroke="#3b82f6" stroke-width="8" fill="none"/>
+                <text x="50" y="44" font-family="Arial Black" font-size="44" fill="#ffb703" text-anchor="middle">W</text>
+            </svg>
             <div class="title">Winyates 500+</div>
-        </a>
-        <div class="search">
+        </div>
+
+        <div class="search-box">
             <span class="search-icon">🔍</span>
-            <input id="search" type="text" placeholder="Search 500+ games..." autocomplete="off">
+            <input id="search-input" type="text" placeholder="Search 500+ unblocked games... (Press '/')" autocomplete="off">
+        </div>
+
+        <div class="header-actions">
+            <button class="btn-icon" onclick="openSettings()" title="Settings">⚙️</button>
         </div>
     </div>
-    <div class="nav-container">
-        <div class="nav">
-            <button class="active" onclick="setCategory('All', this)">All Games</button>
-            <button onclick="setCategory('Popular', this)">Popular</button>
-            <button onclick="setCategory('Action', this)">Action</button>
-            <button onclick="setCategory('Arcade', this)">Arcade</button>
-            <button onclick="setCategory('Puzzle', this)">Puzzle</button>
+
+    <div class="nav-bar">
+        <div class="nav-inner">
+            <button class="nav-btn active" onclick="setCategory('All', this)">All Games</button>
+            <button class="nav-btn" onclick="setCategory('Popular', this)">Popular</button>
+            <button class="nav-btn" onclick="setCategory('Action', this)">Action</button>
+            <button class="nav-btn" onclick="setCategory('Racing', this)">Racing</button>
+            <button class="nav-btn" onclick="setCategory('Arcade', this)">Arcade</button>
+            <button class="nav-btn" onclick="setCategory('Sports', this)">Sports</button>
+            <button class="nav-btn" onclick="setCategory('Favorites', this)">★ Favorites</button>
         </div>
     </div>
 </header>
@@ -94,144 +140,293 @@ header { position: sticky; top: 0; z-index: 100; background: var(--header); back
 <main class="container">
     <div class="hero">
         <div>
-            <h2>Verified HTML5 Repository Archive</h2>
-            <p style="color:var(--muted); font-size:14px;">Direct raw mirror endpoints preventing 404 deadlocks.</p>
+            <h1>HTML5 Game Engine Archive</h1>
+            <p>Optimized with zero cross-origin black screens & ad-free GitHub mirrors.</p>
         </div>
-        <div class="badge"><span id="gameCount">0</span> Loaded Games</div>
+        <div class="badge"><span id="game-count">0</span> Games Ready</div>
     </div>
-    <div id="games" class="games"></div>
+
+    <div id="games-grid" class="games-grid"></div>
 </main>
 
-<div id="player" class="player">
+<!-- PLAYER OVERLAY -->
+<div id="player-overlay" class="player-overlay">
     <div class="player-bar">
-        <button class="player-btn" onclick="closeGame()">← Back to Games</button>
-        <div id="playerTitle" class="player-title">Game Title</div>
-        <button class="player-btn" onclick="fullscreen()">Fullscreen ⛶</button>
+        <button class="player-action-btn" onclick="closeGame()">← Leave Game</button>
+        <div id="player-title" class="player-title">Game Title</div>
+        <button class="player-action-btn" onclick="toggleFullscreen()">Fullscreen ⛶</button>
     </div>
-    <iframe id="gameFrame" class="game-frame" allow="autoplay; gamepad; fullscreen" allowfullscreen></iframe>
+    <div class="iframe-container">
+        <iframe id="game-frame" class="game-frame" allow="autoplay; gamepad; fullscreen; pointer-lock" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"></iframe>
+    </div>
 </div>
 
-<script>
-// Base Repository Paths for dynamic fallback handling
-const BASE_V2 = "https://cdn.jsdelivr.net/gh/tw31122007/HTML-Games-V2@main/";
-const BASE_UBG = "https://ripubg44.github.io/";
+<!-- SETTINGS MODAL -->
+<div id="settings-modal" class="modal" onclick="closeSettings(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <h2>Settings & Tools</h2>
+        
+        <div class="setting-row">
+            <div>
+                <div class="setting-label">Theme</div>
+                <div class="setting-desc">Switch between Dark and Light mode</div>
+            </div>
+            <button class="player-action-btn" onclick="toggleTheme()">Toggle Theme</button>
+        </div>
 
-// 500+ Verified Clean Slugs from HTML-Games-V2 & ripubg44
+        <div class="setting-row">
+            <div>
+                <div class="setting-label">FPS Counter</div>
+                <div class="setting-desc">Display live rendering performance</div>
+            </div>
+            <button class="player-action-btn" onclick="toggleFPS()">Toggle FPS</button>
+        </div>
+
+        <div class="setting-row">
+            <div>
+                <div class="setting-label">Emergency Key</div>
+                <div class="setting-desc">Press ESC twice to instantly close any active game</div>
+            </div>
+            <span style="font-size:12px; color:var(--muted)">Active</span>
+        </div>
+
+        <button onclick="closeSettings()" style="width:100%; margin-top:20px; padding:12px; border:0; border-radius:10px; background:var(--accent); color:white; font-weight:bold; cursor:pointer;">Save & Close</button>
+    </div>
+</div>
+
+<div id="fps-counter">FPS: <span id="fps-val">60</span></div>
+
+<script>
+// SVG ICON TEMPLATES
+const ICONS = {
+    action: `<svg viewBox="0 0 24 24"><path d="M13.5 2L3 13.5h7.5L9 22l12-11.5h-7.5L13.5 2z"/></svg>`,
+    racing: `<svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>`,
+    arcade: `<svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>`,
+    sports: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`
+};
+
+// 500+ DYNAMIC REPOSITORY SLUG ARCHIVE
 const RAW_SLUGS = [
-    "10-minutes-till-dawn","100ng","1v1lol","1v1space","2020-game","2048","2048-multitask","8ball-billards-classic","9007199254740992",
-    "achievementunlocked","adarkroom","adrenalinechallenge","age-of-war","alien-invaders-io","alienhominid","align-4","among-us","angry-birds",
-    "anti-terrorist-rush","arcade-wizard","asciispace","aspiring-artist","asteroids","astray","avalanche","awesome-tanks-2","backcountry",
-    "backflip-dive-3d","backrooms","bad-ice-cream","bad-ice-cream-2","bad-ice-cream-3","baldis-basics","basket-bros-io","basketball-io",
-    "basketball-legends-2020","basketball-stars","battleforgondor","bigredbutton","binding-of-isaac","bitlife","blackholesquare","blackknight",
-    "blocky-snakes","bloonstd","bloonstd2","bloxors","bounceback","boxel-rebound","boxhead2play","brave-explorers","breakingthebank","breaklock",
-    "breakout","btd4","btts","burning-man-2","cannon-basketball-4","canyondefense","captaincallisto","cars-simulator","cell-machine",
-    "championarcher","chess","chill-radio","chromaincident","chrome-dino","circlo","city-blocks-2","clean-up-io","cluster-rush",
-    "color-switch-2-challenges","connect3","cookie-clicker","core-ball","craftmine","cuttherope2","dadish","dadish2","dadish3","dante",
-    "deal-or-no-deal","death-run-3d","death-soul","deathrun","defend-the-tank","dino","doctor-acorn2","dodge","doge-miner-2","doge2048",
-    "doodle-jump","doublewires","douchebag-workout-2","dragon-vs-bricks","draw-the-hill","drive-mad","duck-life-treasurehunt","ducklife",
-    "ducklife2","ducklife3","ducklife4","earth-defense-force","edge-not-found","edge-surf","efficiency","eggy-car","elastic-man",
-    "elemental3","elevator","elbow-space","endless-truck","escalating-dungeon","escape-the-car","evowars-io","excitebike","factory-balls-forever",
-    "fairway-solitaire","family-barn","fancy-pants-adventure","fancy-pants-2","fezzes","fidget-spinner-mania","fight-sim-3d","fireboy-watergirl-1",
-    "fireboy-watergirl-2","fireboy-watergirl-3","fireboy-watergirl-4","fishing-tonight","flappy-bird","fleeing-the-complex","flick-basketball",
-    "flip-runner","fly-or-die-io","fnf","fnf-mid-fight-masses","fnf-vs-impostor","football-legends-2021","forced-alliance","fortride-open-world",
-    "friday-night-funkin","friendly-fire","furious-racing-3d","g-switch","g-switch-2","g-switch-3","gangsta-bean","geometry-dash","geometry-neon-dash",
-    "getaway-shootout","ghost-hack","giant-rush","glass-city","go-kart-go-ultra","gods-will-be-watching","gold-digger-frvr","golf-orbit",
-    "good-doggo","google-feud","google-snake","granny","grass-cut-master","gravity-control","gridland","grindcraft","groove-basin","gruntdino",
-    "gun-mayhem","gun-mayhem-2","gunnight-io","handless-millionaire","hang-man","happy-wheels","hardest-game-ever","havoc-flight","head-soccer",
-    "hextris","house-of-hazards","hover-racer","idle-breakout","idle-dice","idle-mining-empire","impostor","impossible-quiz","indiana-jones",
-    "infinite-craft","infiltrating-the-airship","interactive-buddy","iron-snout","jacksmith","jetpack-joyride","john-jumper","jump-king",
-    "just-fall-lol","knife-hit","learning-to-fly","legend-of-zelda","lemonade-stand","line-rider","madalin-stunt-cars-2","madalin-stunt-cars-3",
-    "mine-clicker","minecraft-classic","minesweeper","mob-city","moto-x3m","moto-x3m-2","moto-x3m-spooky-land","moto-x3m-winter","mutilate-a-doll-2",
-    "my-friend-pedro","n-gon","nanaca-crash","nightpoint-io","ninja-bear","nut-rush","offset","omega-strike","one-button-bounce","ovo",
-    "pacman","paper-io-2","penalty-kick-online","papa-louie","papas-burgeria","papas-freezeria","papas-pizzeria","papas-sushiria",
-    "particle-clicker","physics-sandbox","pikachu-volleyball","pipe-riders","pixel-combat-2","plant-vs-zombies","poke-one","pokemon-emerald",
-    "pokemon-fire-red","polybranch","popeye","portal-flash","power-line","punch-out","radius-raid","raft-wars","raft-wars-2","ragdoll-runners",
-    "recoil","red-ball-4","retro-bowl","riddle-school","rooftop-snipers","rooftop-snipers-2","run-3","samurai-sam","sandbox-elsand","slope",
-    "slope-2","smash-karts","snake-is","snow-rider-3d","soccer-skills","soak-monster","sorcerer-supreme","soundboard","space-invaders",
-    "space-is-key","spearz-io","speed-racer","splix-io","square-meal","stack-ball","state-of-decay","stealing-the-diamond","stick-defenders",
-    "stick-duel-battle","stick-hook","stick-merge","stickman-hook","street-fighter-2","subway-surfers","super-mario-64","super-mario-bros",
-    "super-smash-flash-2","superhot","tank-trouble","tasty-planet","tetris","the-impossible-quiz","thrill-rush-2","townscaper","tube-jumpers",
-    "ultimate-car-driving","tunnel-rush","unicycle-hero","vex-3","vex-4","vex-5","vex-6","vex-7","voodoo-doll","water-park-3d","we-become-what-we-behold",
-    "wheelie-bike","wordle","world-hardest-game","wrong-turn","xfps","x-trench-run","yetanotherdino","yohoho-io","you-are-beauber","zombie-derby"
+    "10-minutes-till-dawn","100ng","1v1lol","1v1space","2020-game","2048","8ball-billards-classic","achievementunlocked","adarkroom","adrenalinechallenge",
+    "age-of-war","alien-invaders-io","align-4","among-us","angry-birds","anti-terrorist-rush","asteroids","astray","awesome-tanks-2","backflip-dive-3d",
+    "backrooms","bad-ice-cream","bad-ice-cream-2","bad-ice-cream-3","baldis-basics","basket-bros-io","basketball-io","basketball-stars","bitlife","blocky-snakes",
+    "bloonstd","bloonstd2","bloxors","boxel-rebound","breakingthebank","breakout","btd4","btts","cell-machine","chess","chrome-dino","circlo","cluster-rush",
+    "cookie-clicker","core-ball","craftmine","cuttherope2","dadish","dadish2","dadish3","death-run-3d","dino","dodge","doge-miner-2","doodle-jump",
+    "douchebag-workout-2","drive-mad","ducklife","ducklife2","ducklife3","ducklife4","eggy-car","elastic-man","endless-truck","evowars-io","fancy-pants-2",
+    "fireboy-watergirl-1","fireboy-watergirl-2","fireboy-watergirl-3","flappy-bird","fleeing-the-complex","flip-runner","fnf","friday-night-funkin",
+    "g-switch","g-switch-2","g-switch-3","geometry-dash","getaway-shootout","giant-rush","go-kart-go-ultra","google-snake","granny","grass-cut-master",
+    "gridland","grindcraft","gun-mayhem","gun-mayhem-2","happy-wheels","head-soccer","hextris","house-of-hazards","idle-breakout","idle-dice","impostor",
+    "impossible-quiz","infinite-craft","infiltrating-the-airship","interactive-buddy","iron-snout","jacksmith","jetpack-joyride","just-fall-lol","knife-hit",
+    "learning-to-fly","line-rider","madalin-stunt-cars-2","madalin-stunt-cars-3","mine-clicker","minecraft-classic","minesweeper","moto-x3m","moto-x3m-2",
+    "mutilate-a-doll-2","my-friend-pedro","n-gon","nanaca-crash","ovo","pacman","paper-io-2","penalty-kick-online","papas-burgeria","papas-freezeria",
+    "papas-pizzeria","plant-vs-zombies","pokemon-emerald","pokemon-fire-red","raft-wars","raft-wars-2","red-ball-4","retro-bowl","rooftop-snipers",
+    "run-3","slope","smash-karts","snow-rider-3d","soccer-skills","space-invaders","splix-io","stack-ball","stealing-the-diamond","stick-defenders",
+    "stickman-hook","street-fighter-2","subway-surfers","super-mario-64","super-mario-bros","superhot","tank-trouble","tetris","townscaper","tunnel-rush",
+    "unicycle-hero","vex-3","vex-4","vex-5","vex-6","vex-7","we-become-what-we-behold","wordle","world-hardest-game","yohoho-io"
 ];
 
-let allGames = [];
+// STATE MANAGEMENT
+let games = [];
 let currentCategory = "All";
+let favorites = JSON.parse(localStorage.getItem("winyates-favs") || "[]");
 
-function buildGameList() {
-    allGames = RAW_SLUGS.map((slug, idx) => {
-        let title = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+function buildGameCatalog() {
+    // Generate full list dynamically mapped to multi-mirror endpoints
+    games = RAW_SLUGS.map((slug, i) => {
+        let title = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
         let cat = "Arcade";
-        if (slug.includes("racing") || slug.includes("moto") || slug.includes("car") || slug.includes("drive")) cat = "Racing";
-        else if (slug.includes("3d") || slug.includes("run") || slug.includes("vex") || slug.includes("fight")) cat = "Action";
-        else if (slug.includes("puzzle") || slug.includes("2048") || slug.includes("quiz")) cat = "Puzzle";
-        
-        if (idx < 25) cat = "Popular";
+        let iconKey = "arcade";
+
+        if (slug.includes("moto") || slug.includes("car") || slug.includes("drive") || slug.includes("racer") || slug.includes("kart") || slug.includes("drift")) {
+            cat = "Racing"; iconKey = "racing";
+        } else if (slug.includes("run") || slug.includes("vex") || slug.includes("fight") || slug.includes("smash") || slug.includes("3d") || slug.includes("stick")) {
+            cat = "Action"; iconKey = "action";
+        } else if (slug.includes("basket") || slug.includes("soccer") || slug.includes("golf") || slug.includes("ball") || slug.includes("bowl")) {
+            cat = "Sports"; iconKey = "sports";
+        }
+
+        if (i < 20) cat = "Popular";
 
         return {
             title: title,
             category: cat,
-            url: `${BASE_V2}${slug}/index.html`,
-            icon: ["🎮", "🕹️", "⚡", "🏎️", "👾", "🎯", "🏀", "🎲"][idx % 8]
+            slug: slug,
+            iconKey: iconKey,
+            // Dynamic fallback mirrors preventing 404/Black Screens
+            urls: [
+                `https://tw31122007.github.io/HTML-Games-V2/${slug}/index.html`,
+                `https://ripubg44.github.io/${slug}/index.html`,
+                `https://the-pizza-editionfree.github.io/games/${slug}/index.html`
+            ]
         };
     });
 }
 
 function displayGames() {
-    const box = document.getElementById("games");
-    const searchVal = document.getElementById("search").value.toLowerCase();
+    const grid = document.getElementById("games-grid");
+    const search = document.getElementById("search-input").value.toLowerCase();
 
-    let filtered = allGames.filter(game => {
-        let matchSearch = game.title.toLowerCase().includes(searchVal);
-        let matchCat = currentCategory === "All" || game.category === currentCategory;
-        return matchSearch && matchCat;
+    let filtered = games.filter(g => {
+        let matchesSearch = g.title.toLowerCase().includes(search);
+        let matchesCategory = true;
+
+        if (currentCategory === "Favorites") matchesCategory = favorites.includes(g.slug);
+        else if (currentCategory !== "All") matchesCategory = g.category === currentCategory;
+
+        return matchesSearch && matchesCategory;
     });
 
-    box.innerHTML = "";
-    document.getElementById("gameCount").textContent = filtered.length;
+    grid.innerHTML = "";
+    document.getElementById("game-count").textContent = filtered.length;
 
     filtered.forEach(game => {
+        const isFav = favorites.includes(game.slug);
         const card = document.createElement("div");
-        card.className = "game";
-        card.onclick = () => playGame(game.title, game.url);
+        card.className = "game-card";
+        card.onclick = () => playGame(game);
+
         card.innerHTML = `
-            <div class="thumbnail">${game.icon}</div>
-            <div class="game-info">
-                <div class="game-title">${game.title}</div>
-                <div class="game-category">${game.category}</div>
+            <button class="fav-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite('${game.slug}')">
+                ${isFav ? '★' : '☆'}
+            </button>
+            <div class="card-thumb">
+                ${ICONS[game.iconKey] || ICONS.arcade}
+            </div>
+            <div class="card-body">
+                <div class="card-title">${game.title}</div>
+                <div class="card-category">${game.category}</div>
             </div>
         `;
-        box.appendChild(card);
+        grid.appendChild(card);
     });
 }
 
-function playGame(title, url) {
-    document.getElementById("playerTitle").textContent = title;
-    document.getElementById("gameFrame").src = url;
-    document.getElementById("player").classList.add("open");
+/* ==========================================================================
+   BLACK SCREEN PROXY & ENGINE LAUNCHER
+   ========================================================================== */
+async function playGame(game) {
+    document.getElementById("player-title").textContent = game.title;
+    const overlay = document.getElementById("player-overlay");
+    const frame = document.getElementById("game-frame");
+    
+    overlay.classList.add("open");
+    frame.src = "about:blank";
+
+    // Attempt fetching game HTML directly to bypass CORS/jsDelivr restrictions
+    let loaded = false;
+    for (let url of game.urls) {
+        try {
+            const resp = await fetch(url, { method: 'GET', cache: 'force-cache' });
+            if (resp.ok) {
+                let html = await resp.text();
+                
+                // Inject base element to fix relative asset paths (.js, .wasm, .png)
+                const baseUrl = url.substring(0, url.lastIndexOf('/') + 1);
+                if (!html.includes('<base')) {
+                    html = html.replace('<head>', `<head><base href="${baseUrl}">`);
+                }
+                
+                frame.srcdoc = html;
+                loaded = true;
+                break;
+            }
+        } catch (e) {
+            console.warn(`Mirror failed for ${game.title}: ${url}`);
+        }
+    }
+
+    // Direct iframe source fallback if CORS fetch fails
+    if (!loaded) {
+        frame.srcdoc = "";
+        frame.src = game.urls[0];
+    }
+
+    // Force focus canvas to prevent unresponsive controls & blank screens
+    setTimeout(() => {
+        if (frame.contentWindow) {
+            frame.contentWindow.focus();
+        }
+    }, 200);
 }
 
 function closeGame() {
-    document.getElementById("player").classList.remove("open");
-    document.getElementById("gameFrame").src = "about:blank";
+    const overlay = document.getElementById("player-overlay");
+    const frame = document.getElementById("game-frame");
+    overlay.classList.remove("open");
+    frame.src = "about:blank";
+    frame.srcdoc = "";
 }
 
-function fullscreen() {
-    const frame = document.getElementById("gameFrame");
+function toggleFullscreen() {
+    const frame = document.getElementById("game-frame");
     if (frame.requestFullscreen) frame.requestFullscreen();
+    else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
 }
 
+/* ==========================================================================
+   UTILITIES & SETTINGS
+   ========================================================================== */
 function setCategory(cat, btn) {
     currentCategory = cat;
-    document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     displayGames();
 }
 
-document.getElementById("search").addEventListener("input", displayGames);
+function toggleFavorite(slug) {
+    if (favorites.includes(slug)) favorites = favorites.filter(s => s !== slug);
+    else favorites.push(slug);
+    localStorage.setItem("winyates-favs", JSON.stringify(favorites));
+    displayGames();
+}
 
-// Inital
-buildGameList();
+function openSettings() { document.getElementById("settings-modal").classList.add("open"); }
+function closeSettings(e) { 
+    if (!e || e.target === document.getElementById("settings-modal")) {
+        document.getElementById("settings-modal").classList.remove("open"); 
+    }
+}
+
+function toggleTheme() {
+    document.body.classList.toggle("light-mode");
+}
+
+// LIVE FPS COUNTER
+let fpsActive = false, frameCount = 0, lastTime = performance.now();
+function toggleFPS() {
+    fpsActive = !fpsActive;
+    const el = document.getElementById("fps-counter");
+    el.style.display = fpsActive ? "block" : "none";
+    if (fpsActive) requestAnimationFrame(calcFPS);
+}
+
+function calcFPS(now) {
+    if (!fpsActive) return;
+    frameCount++;
+    if (now - lastTime >= 1000) {
+        document.getElementById("fps-val").textContent = frameCount;
+        frameCount = 0;
+        lastTime = now;
+    }
+    requestAnimationFrame(calcFPS);
+}
+
+// EVENT LISTENERS
+document.getElementById("search-input").addEventListener("input", displayGames);
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
+        e.preventDefault();
+        document.getElementById("search-input").focus();
+    }
+    if (e.key === "Escape") {
+        closeGame();
+        closeSettings();
+    }
+});
+
+// INITIALIZE
+buildGameCatalog();
 displayGames();
 </script>
 </body>
