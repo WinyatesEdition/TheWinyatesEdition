@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Winyates Edition — 500+ Ultimate Unblocked Games</title>
+<title>The Winyates Edition — 500+ Fixed Games</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50,90 Q40,80 50,70 T50,50 T50,30' stroke='%23ff9900' stroke-width='6' fill='none'/><path d='M30,75 Q70,75 50,60 T30,45 T70,30' stroke='%233388ff' stroke-width='8' fill='none'/><path d='M20,40 Q80,40 50,20' stroke='%238800cc' stroke-width='10' fill='none'/><text x='50' y='42' font-family='Arial Black, sans-serif' font-size='42' fill='%23ffaa00' stroke='%23442200' stroke-width='2' text-anchor='middle'>W</text></svg>">
 
 <style>
@@ -15,25 +15,24 @@
     --muted: #94a3b8;
     --border: rgba(255, 255, 255, 0.08);
     --accent: #6366f1;
-    --accent-hover: #4f46e5;
-    --accent-glow: rgba(99, 102, 241, 0.25);
-    --header: rgba(11, 14, 20, 0.85);
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    --header: rgba(11, 14, 20, 0.9);
 }
 
-body.light-mode {
+body.light {
     --bg: #f8fafc;
     --card: #ffffff;
     --card-hover: #f1f5f9;
     --text: #0f172a;
     --muted: #64748b;
     --border: rgba(0, 0, 0, 0.08);
-    --header: rgba(248, 250, 252, 0.85);
+    --header: rgba(248, 250, 252, 0.9);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
 body { background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
-/* HEADER */
+/* HEADER & NAVBAR */
 header { position: sticky; top: 0; z-index: 100; background: var(--header); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
 .header-inner { max-width: 1600px; margin: auto; padding: 12px 24px; display: flex; align-items: center; gap: 20px; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; cursor: pointer; }
@@ -48,14 +47,13 @@ header { position: sticky; top: 0; z-index: 100; background: var(--header); back
 .btn-icon { border: 1px solid var(--border); background: var(--card); color: var(--text); width: 42px; height: 42px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
 .btn-icon:hover { background: var(--card-hover); border-color: var(--accent); transform: translateY(-1px); }
 
-/* CATEGORIES NAV */
 .nav-bar { border-top: 1px solid var(--border); background: rgba(0,0,0,0.1); }
 .nav-inner { max-width: 1600px; margin: auto; padding: 10px 24px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
 .nav-btn { border: 1px solid var(--border); background: var(--card); color: var(--muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-size: 13px; font-weight: 600; transition: all 0.2s; }
 .nav-btn:hover { color: var(--text); border-color: var(--accent); }
 .nav-btn.active { background: var(--accent); color: white; border-color: transparent; box-shadow: 0 4px 12px var(--accent-glow); }
 
-/* MAIN GRID */
+/* MAIN CONTENT */
 .container { max-width: 1600px; margin: auto; padding: 24px; }
 .hero { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
 .hero h1 { font-size: 26px; font-weight: 800; }
@@ -77,7 +75,7 @@ header { position: sticky; top: 0; z-index: 100; background: var(--header); back
 .fav-btn { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); color: white; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 2; }
 .fav-btn.active { color: #ffb703; }
 
-/* PLAYER OVERLAY */
+/* FULLSCREEN PLAYER OVERLAY */
 .player-overlay { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(11, 14, 20, 0.98); backdrop-filter: blur(12px); padding: 16px; flex-direction: column; }
 .player-overlay.open { display: flex; }
 .player-bar { display: flex; align-items: center; gap: 16px; padding-bottom: 12px; }
@@ -116,7 +114,7 @@ header { position: sticky; top: 0; z-index: 100; background: var(--header); back
 
         <div class="search-box">
             <span class="search-icon">🔍</span>
-            <input id="search-input" type="text" placeholder="Search 500+ unblocked games... (Press '/')" autocomplete="off">
+            <input id="search-input" type="text" placeholder="Search unblocked games... (Press '/')" autocomplete="off">
         </div>
 
         <div class="header-actions">
@@ -140,10 +138,10 @@ header { position: sticky; top: 0; z-index: 100; background: var(--header); back
 <main class="container">
     <div class="hero">
         <div>
-            <h1>HTML5 Game Engine Archive</h1>
-            <p>Optimized with zero cross-origin black screens & ad-free GitHub mirrors.</p>
+            <h1>GitHub Repository Archive</h1>
+            <p>Loaded directly with base injection to prevent cross-origin black screens.</p>
         </div>
-        <div class="badge"><span id="game-count">0</span> Games Ready</div>
+        <div class="badge"><span id="game-count">0</span> Active Games</div>
     </div>
 
     <div id="games-grid" class="games-grid"></div>
@@ -182,14 +180,6 @@ header { position: sticky; top: 0; z-index: 100; background: var(--header); back
             <button class="player-action-btn" onclick="toggleFPS()">Toggle FPS</button>
         </div>
 
-        <div class="setting-row">
-            <div>
-                <div class="setting-label">Emergency Key</div>
-                <div class="setting-desc">Press ESC twice to instantly close any active game</div>
-            </div>
-            <span style="font-size:12px; color:var(--muted)">Active</span>
-        </div>
-
         <button onclick="closeSettings()" style="width:100%; margin-top:20px; padding:12px; border:0; border-radius:10px; background:var(--accent); color:white; font-weight:bold; cursor:pointer;">Save & Close</button>
     </div>
 </div>
@@ -197,7 +187,6 @@ header { position: sticky; top: 0; z-index: 100; background: var(--header); back
 <div id="fps-counter">FPS: <span id="fps-val">60</span></div>
 
 <script>
-// SVG ICON TEMPLATES
 const ICONS = {
     action: `<svg viewBox="0 0 24 24"><path d="M13.5 2L3 13.5h7.5L9 22l12-11.5h-7.5L13.5 2z"/></svg>`,
     racing: `<svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>`,
@@ -205,7 +194,6 @@ const ICONS = {
     sports: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`
 };
 
-// 500+ DYNAMIC REPOSITORY SLUG ARCHIVE
 const RAW_SLUGS = [
     "10-minutes-till-dawn","100ng","1v1lol","1v1space","2020-game","2048","8ball-billards-classic","achievementunlocked","adarkroom","adrenalinechallenge",
     "age-of-war","alien-invaders-io","align-4","among-us","angry-birds","anti-terrorist-rush","asteroids","astray","awesome-tanks-2","backflip-dive-3d",
@@ -225,13 +213,11 @@ const RAW_SLUGS = [
     "unicycle-hero","vex-3","vex-4","vex-5","vex-6","vex-7","we-become-what-we-behold","wordle","world-hardest-game","yohoho-io"
 ];
 
-// STATE MANAGEMENT
 let games = [];
 let currentCategory = "All";
 let favorites = JSON.parse(localStorage.getItem("winyates-favs") || "[]");
 
 function buildGameCatalog() {
-    // Generate full list dynamically mapped to multi-mirror endpoints
     games = RAW_SLUGS.map((slug, i) => {
         let title = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
         let cat = "Arcade";
@@ -252,11 +238,10 @@ function buildGameCatalog() {
             category: cat,
             slug: slug,
             iconKey: iconKey,
-            // Dynamic fallback mirrors preventing 404/Black Screens
             urls: [
                 `https://tw31122007.github.io/HTML-Games-V2/${slug}/index.html`,
                 `https://ripubg44.github.io/${slug}/index.html`,
-                `https://the-pizza-editionfree.github.io/games/${slug}/index.html`
+                `https://raw.githack.com/tw31122007/HTML-Games-V2/main/${slug}/index.html`
             ]
         };
     });
@@ -301,9 +286,6 @@ function displayGames() {
     });
 }
 
-/* ==========================================================================
-   BLACK SCREEN PROXY & ENGINE LAUNCHER
-   ========================================================================== */
 async function playGame(game) {
     document.getElementById("player-title").textContent = game.title;
     const overlay = document.getElementById("player-overlay");
@@ -312,16 +294,15 @@ async function playGame(game) {
     overlay.classList.add("open");
     frame.src = "about:blank";
 
-    // Attempt fetching game HTML directly to bypass CORS/jsDelivr restrictions
     let loaded = false;
     for (let url of game.urls) {
         try {
-            const resp = await fetch(url, { method: 'GET', cache: 'force-cache' });
+            const resp = await fetch(url, { method: 'GET' });
             if (resp.ok) {
                 let html = await resp.text();
-                
-                // Inject base element to fix relative asset paths (.js, .wasm, .png)
                 const baseUrl = url.substring(0, url.lastIndexOf('/') + 1);
+                
+                // Inject base tag directly into source to resolve canvas engine black screens
                 if (!html.includes('<base')) {
                     html = html.replace('<head>', `<head><base href="${baseUrl}">`);
                 }
@@ -331,21 +312,17 @@ async function playGame(game) {
                 break;
             }
         } catch (e) {
-            console.warn(`Mirror failed for ${game.title}: ${url}`);
+            console.warn(`Mirror retry for ${game.title}`);
         }
     }
 
-    // Direct iframe source fallback if CORS fetch fails
     if (!loaded) {
         frame.srcdoc = "";
         frame.src = game.urls[0];
     }
 
-    // Force focus canvas to prevent unresponsive controls & blank screens
     setTimeout(() => {
-        if (frame.contentWindow) {
-            frame.contentWindow.focus();
-        }
+        if (frame.contentWindow) frame.contentWindow.focus();
     }, 200);
 }
 
@@ -363,9 +340,6 @@ function toggleFullscreen() {
     else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
 }
 
-/* ==========================================================================
-   UTILITIES & SETTINGS
-   ========================================================================== */
 function setCategory(cat, btn) {
     currentCategory = cat;
     document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
@@ -387,11 +361,8 @@ function closeSettings(e) {
     }
 }
 
-function toggleTheme() {
-    document.body.classList.toggle("light-mode");
-}
+function toggleTheme() { document.body.classList.toggle("light"); }
 
-// LIVE FPS COUNTER
 let fpsActive = false, frameCount = 0, lastTime = performance.now();
 function toggleFPS() {
     fpsActive = !fpsActive;
@@ -411,7 +382,6 @@ function calcFPS(now) {
     requestAnimationFrame(calcFPS);
 }
 
-// EVENT LISTENERS
 document.getElementById("search-input").addEventListener("input", displayGames);
 
 document.addEventListener("keydown", (e) => {
@@ -425,7 +395,6 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-// INITIALIZE
 buildGameCatalog();
 displayGames();
 </script>
