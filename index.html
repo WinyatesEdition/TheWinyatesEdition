@@ -3,400 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Winyates Edition — 500+ Fixed Games</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50,90 Q40,80 50,70 T50,50 T50,30' stroke='%23ff9900' stroke-width='6' fill='none'/><path d='M30,75 Q70,75 50,60 T30,45 T70,30' stroke='%233388ff' stroke-width='8' fill='none'/><path d='M20,40 Q80,40 50,20' stroke='%238800cc' stroke-width='10' fill='none'/><text x='50' y='42' font-family='Arial Black, sans-serif' font-size='42' fill='%23ffaa00' stroke='%23442200' stroke-width='2' text-anchor='middle'>W</text></svg>">
-
+<title>Offline HTML5 Arcade</title>
 <style>
-:root {
-    --bg: #0b0e14;
-    --card: #151922;
-    --card-hover: #1e2430;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --border: rgba(255, 255, 255, 0.08);
-    --accent: #6366f1;
-    --accent-glow: rgba(99, 102, 241, 0.3);
-    --header: rgba(11, 14, 20, 0.9);
-}
+    :root {
+        --bg-color: #0f172a;
+        --card-bg: #1e293b;
+        --accent-color: #3b82f6;
+        --text-color: #f8fafc;
+        --text-muted: #94a3b8;
+    }
 
-body.light {
-    --bg: #f8fafc;
-    --card: #ffffff;
-    --card-hover: #f1f5f9;
-    --text: #0f172a;
-    --muted: #64748b;
-    --border: rgba(0, 0, 0, 0.08);
-    --header: rgba(248, 250, 252, 0.9);
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-body { background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
-
-/* HEADER & NAVBAR */
-header { position: sticky; top: 0; z-index: 100; background: var(--header); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
-.header-inner { max-width: 1600px; margin: auto; padding: 12px 24px; display: flex; align-items: center; gap: 20px; }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; cursor: pointer; }
-.title { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; background: linear-gradient(135deg, #ff9900, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-.search-box { flex: 1; max-width: 500px; margin-left: auto; position: relative; }
-.search-box input { width: 100%; padding: 10px 16px 10px 42px; border: 1px solid var(--border); border-radius: 12px; outline: none; background: var(--card); color: var(--text); font-size: 14px; transition: all 0.2s; }
-.search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
-
-.header-actions { display: flex; gap: 10px; }
-.btn-icon { border: 1px solid var(--border); background: var(--card); color: var(--text); width: 42px; height: 42px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-.btn-icon:hover { background: var(--card-hover); border-color: var(--accent); transform: translateY(-1px); }
-
-.nav-bar { border-top: 1px solid var(--border); background: rgba(0,0,0,0.1); }
-.nav-inner { max-width: 1600px; margin: auto; padding: 10px 24px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-.nav-btn { border: 1px solid var(--border); background: var(--card); color: var(--muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-size: 13px; font-weight: 600; transition: all 0.2s; }
-.nav-btn:hover { color: var(--text); border-color: var(--accent); }
-.nav-btn.active { background: var(--accent); color: white; border-color: transparent; box-shadow: 0 4px 12px var(--accent-glow); }
-
-/* MAIN CONTENT */
-.container { max-width: 1600px; margin: auto; padding: 24px; }
-.hero { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
-.hero h1 { font-size: 26px; font-weight: 800; }
-.hero p { color: var(--muted); font-size: 14px; margin-top: 4px; }
-.badge { background: var(--card); border: 1px solid var(--border); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--accent); }
-
-.games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-.game-card { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
-.game-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 12px 24px -8px rgba(0,0,0,0.5); }
-
-.card-thumb { height: 130px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(168,85,247,0.08)); position: relative; }
-.card-thumb svg { width: 48px; height: 48px; fill: var(--accent); transition: transform 0.2s; }
-.game-card:hover .card-thumb svg { transform: scale(1.1); }
-
-.card-body { padding: 14px; display: flex; flex-direction: column; gap: 4px; }
-.card-title { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.card-category { color: var(--muted); font-size: 12px; font-weight: 500; }
-
-.fav-btn { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); color: white; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 2; }
-.fav-btn.active { color: #ffb703; }
-
-/* FULLSCREEN PLAYER OVERLAY */
-.player-overlay { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(11, 14, 20, 0.98); backdrop-filter: blur(12px); padding: 16px; flex-direction: column; }
-.player-overlay.open { display: flex; }
-.player-bar { display: flex; align-items: center; gap: 16px; padding-bottom: 12px; }
-.player-title { color: white; font-size: 18px; font-weight: 700; margin-right: auto; }
-.player-action-btn { border: 1px solid var(--border); background: #1e2430; color: white; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.2s; }
-.player-action-btn:hover { background: var(--accent); }
-.iframe-container { flex: 1; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; background: #000; position: relative; }
-.game-frame { width: 100%; height: 100%; border: 0; background: #000; }
-
-/* MODALS */
-.modal { display: none; position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 20px; }
-.modal.open { display: flex; }
-.modal-box { width: 440px; max-width: 100%; background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
-.modal-box h2 { font-size: 20px; margin-bottom: 16px; font-weight: 800; }
-.setting-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
-.setting-row:last-child { border-bottom: 0; }
-.setting-label { font-size: 14px; font-weight: 600; }
-.setting-desc { font-size: 12px; color: var(--muted); }
-
-/* FPS COUNTER */
-#fps-counter { position: fixed; bottom: 12px; right: 12px; background: rgba(0,0,0,0.8); border: 1px solid var(--border); padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; color: #10b981; z-index: 999; display: none; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
+    
+    header { background-color: var(--card-bg); padding: 1rem 2rem; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+    h1 { font-size: 1.5rem; font-weight: 700; color: var(--accent-color); }
+    
+    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; width: 100%; flex: 1; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+    
+    .card { background-color: var(--card-bg); border-radius: 8px; border: 1px solid #334155; overflow: hidden; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
+    .card:hover { transform: translateY(-4px); border-color: var(--accent-color); }
+    .card-body { padding: 1.25rem; }
+    .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .card-desc { font-size: 0.875rem; color: var(--text-muted); }
+    
+    .modal { display: none; position: fixed; inset: 0; background-color: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; padding: 1rem; }
+    .modal.active { display: flex; }
+    .modal-content { background-color: var(--card-bg); border-radius: 8px; width: 100%; max-width: 640px; border: 1px solid #334155; display: flex; flex-direction: column; overflow: hidden; }
+    .modal-header { padding: 1rem; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+    .close-btn { background: none; border: none; color: var(--text-color); font-size: 1.5rem; cursor: pointer; }
+    
+    .game-viewport { width: 100%; height: 400px; background-color: #000; display: flex; justify-content: center; align-items: center; }
+    canvas { background-color: #000; display: block; }
 </style>
 </head>
 <body>
 
 <header>
-    <div class="header-inner">
-        <div class="brand" onclick="location.reload()">
-            <svg width="36" height="36" viewBox="0 0 100 100">
-                <path d="M50,90 Q35,80 50,68 T50,48 T50,28" stroke="#ff9900" stroke-width="6" fill="none"/>
-                <path d="M25,75 Q75,75 50,58 T25,42 T75,25" stroke="#3b82f6" stroke-width="8" fill="none"/>
-                <text x="50" y="44" font-family="Arial Black" font-size="44" fill="#ffb703" text-anchor="middle">W</text>
-            </svg>
-            <div class="title">Winyates 500+</div>
-        </div>
-
-        <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input id="search-input" type="text" placeholder="Search unblocked games... (Press '/')" autocomplete="off">
-        </div>
-
-        <div class="header-actions">
-            <button class="btn-icon" onclick="openSettings()" title="Settings">⚙️</button>
-        </div>
-    </div>
-
-    <div class="nav-bar">
-        <div class="nav-inner">
-            <button class="nav-btn active" onclick="setCategory('All', this)">All Games</button>
-            <button class="nav-btn" onclick="setCategory('Popular', this)">Popular</button>
-            <button class="nav-btn" onclick="setCategory('Action', this)">Action</button>
-            <button class="nav-btn" onclick="setCategory('Racing', this)">Racing</button>
-            <button class="nav-btn" onclick="setCategory('Arcade', this)">Arcade</button>
-            <button class="nav-btn" onclick="setCategory('Sports', this)">Sports</button>
-            <button class="nav-btn" onclick="setCategory('Favorites', this)">★ Favorites</button>
-        </div>
-    </div>
+    <h1>Offline Canvas Arcade</h1>
 </header>
 
 <main class="container">
-    <div class="hero">
-        <div>
-            <h1>GitHub Repository Archive</h1>
-            <p>Loaded directly with base injection to prevent cross-origin black screens.</p>
+    <div class="grid">
+        <div class="card" onclick="launchGame('snake')">
+            <div class="card-body">
+                <div class="card-title">Classic Snake</div>
+                <div class="card-desc">Navigate the grid, collect food, and avoid colliding with walls or yourself.</div>
+            </div>
         </div>
-        <div class="badge"><span id="game-count">0</span> Active Games</div>
+        <div class="card" onclick="launchGame('pong')">
+            <div class="card-body">
+                <div class="card-title">Pong Solo</div>
+                <div class="card-desc">Keep the ball in play using the paddle and score points against the wall.</div>
+            </div>
+        </div>
     </div>
-
-    <div id="games-grid" class="games-grid"></div>
 </main>
 
-<!-- PLAYER OVERLAY -->
-<div id="player-overlay" class="player-overlay">
-    <div class="player-bar">
-        <button class="player-action-btn" onclick="closeGame()">← Leave Game</button>
-        <div id="player-title" class="player-title">Game Title</div>
-        <button class="player-action-btn" onclick="toggleFullscreen()">Fullscreen ⛶</button>
-    </div>
-    <div class="iframe-container">
-        <iframe id="game-frame" class="game-frame" allow="autoplay; gamepad; fullscreen; pointer-lock" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"></iframe>
+<div id="gameModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Game</h2>
+            <button class="close-btn" onclick="closeGame()">&times;</button>
+        </div>
+        <div class="game-viewport">
+            <canvas id="gameCanvas" width="600" height="380"></canvas>
+        </div>
     </div>
 </div>
-
-<!-- SETTINGS MODAL -->
-<div id="settings-modal" class="modal" onclick="closeSettings(event)">
-    <div class="modal-box" onclick="event.stopPropagation()">
-        <h2>Settings & Tools</h2>
-        
-        <div class="setting-row">
-            <div>
-                <div class="setting-label">Theme</div>
-                <div class="setting-desc">Switch between Dark and Light mode</div>
-            </div>
-            <button class="player-action-btn" onclick="toggleTheme()">Toggle Theme</button>
-        </div>
-
-        <div class="setting-row">
-            <div>
-                <div class="setting-label">FPS Counter</div>
-                <div class="setting-desc">Display live rendering performance</div>
-            </div>
-            <button class="player-action-btn" onclick="toggleFPS()">Toggle FPS</button>
-        </div>
-
-        <button onclick="closeSettings()" style="width:100%; margin-top:20px; padding:12px; border:0; border-radius:10px; background:var(--accent); color:white; font-weight:bold; cursor:pointer;">Save & Close</button>
-    </div>
-</div>
-
-<div id="fps-counter">FPS: <span id="fps-val">60</span></div>
 
 <script>
-const ICONS = {
-    action: `<svg viewBox="0 0 24 24"><path d="M13.5 2L3 13.5h7.5L9 22l12-11.5h-7.5L13.5 2z"/></svg>`,
-    racing: `<svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>`,
-    arcade: `<svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>`,
-    sports: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`
-};
+let currentGameLoop = null;
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
-const RAW_SLUGS = [
-    "10-minutes-till-dawn","100ng","1v1lol","1v1space","2020-game","2048","8ball-billards-classic","achievementunlocked","adarkroom","adrenalinechallenge",
-    "age-of-war","alien-invaders-io","align-4","among-us","angry-birds","anti-terrorist-rush","asteroids","astray","awesome-tanks-2","backflip-dive-3d",
-    "backrooms","bad-ice-cream","bad-ice-cream-2","bad-ice-cream-3","baldis-basics","basket-bros-io","basketball-io","basketball-stars","bitlife","blocky-snakes",
-    "bloonstd","bloonstd2","bloxors","boxel-rebound","breakingthebank","breakout","btd4","btts","cell-machine","chess","chrome-dino","circlo","cluster-rush",
-    "cookie-clicker","core-ball","craftmine","cuttherope2","dadish","dadish2","dadish3","death-run-3d","dino","dodge","doge-miner-2","doodle-jump",
-    "douchebag-workout-2","drive-mad","ducklife","ducklife2","ducklife3","ducklife4","eggy-car","elastic-man","endless-truck","evowars-io","fancy-pants-2",
-    "fireboy-watergirl-1","fireboy-watergirl-2","fireboy-watergirl-3","flappy-bird","fleeing-the-complex","flip-runner","fnf","friday-night-funkin",
-    "g-switch","g-switch-2","g-switch-3","geometry-dash","getaway-shootout","giant-rush","go-kart-go-ultra","google-snake","granny","grass-cut-master",
-    "gridland","grindcraft","gun-mayhem","gun-mayhem-2","happy-wheels","head-soccer","hextris","house-of-hazards","idle-breakout","idle-dice","impostor",
-    "impossible-quiz","infinite-craft","infiltrating-the-airship","interactive-buddy","iron-snout","jacksmith","jetpack-joyride","just-fall-lol","knife-hit",
-    "learning-to-fly","line-rider","madalin-stunt-cars-2","madalin-stunt-cars-3","mine-clicker","minecraft-classic","minesweeper","moto-x3m","moto-x3m-2",
-    "mutilate-a-doll-2","my-friend-pedro","n-gon","nanaca-crash","ovo","pacman","paper-io-2","penalty-kick-online","papas-burgeria","papas-freezeria",
-    "papas-pizzeria","plant-vs-zombies","pokemon-emerald","pokemon-fire-red","raft-wars","raft-wars-2","red-ball-4","retro-bowl","rooftop-snipers",
-    "run-3","slope","smash-karts","snow-rider-3d","soccer-skills","space-invaders","splix-io","stack-ball","stealing-the-diamond","stick-defenders",
-    "stickman-hook","street-fighter-2","subway-surfers","super-mario-64","super-mario-bros","superhot","tank-trouble","tetris","townscaper","tunnel-rush",
-    "unicycle-hero","vex-3","vex-4","vex-5","vex-6","vex-7","we-become-what-we-behold","wordle","world-hardest-game","yohoho-io"
-];
-
-let games = [];
-let currentCategory = "All";
-let favorites = JSON.parse(localStorage.getItem("winyates-favs") || "[]");
-
-function buildGameCatalog() {
-    games = RAW_SLUGS.map((slug, i) => {
-        let title = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        let cat = "Arcade";
-        let iconKey = "arcade";
-
-        if (slug.includes("moto") || slug.includes("car") || slug.includes("drive") || slug.includes("racer") || slug.includes("kart") || slug.includes("drift")) {
-            cat = "Racing"; iconKey = "racing";
-        } else if (slug.includes("run") || slug.includes("vex") || slug.includes("fight") || slug.includes("smash") || slug.includes("3d") || slug.includes("stick")) {
-            cat = "Action"; iconKey = "action";
-        } else if (slug.includes("basket") || slug.includes("soccer") || slug.includes("golf") || slug.includes("ball") || slug.includes("bowl")) {
-            cat = "Sports"; iconKey = "sports";
-        }
-
-        if (i < 20) cat = "Popular";
-
-        return {
-            title: title,
-            category: cat,
-            slug: slug,
-            iconKey: iconKey,
-            urls: [
-                `https://tw31122007.github.io/HTML-Games-V2/${slug}/index.html`,
-                `https://ripubg44.github.io/${slug}/index.html`,
-                `https://raw.githack.com/tw31122007/HTML-Games-V2/main/${slug}/index.html`
-            ]
-        };
-    });
-}
-
-function displayGames() {
-    const grid = document.getElementById("games-grid");
-    const search = document.getElementById("search-input").value.toLowerCase();
-
-    let filtered = games.filter(g => {
-        let matchesSearch = g.title.toLowerCase().includes(search);
-        let matchesCategory = true;
-
-        if (currentCategory === "Favorites") matchesCategory = favorites.includes(g.slug);
-        else if (currentCategory !== "All") matchesCategory = g.category === currentCategory;
-
-        return matchesSearch && matchesCategory;
-    });
-
-    grid.innerHTML = "";
-    document.getElementById("game-count").textContent = filtered.length;
-
-    filtered.forEach(game => {
-        const isFav = favorites.includes(game.slug);
-        const card = document.createElement("div");
-        card.className = "game-card";
-        card.onclick = () => playGame(game);
-
-        card.innerHTML = `
-            <button class="fav-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite('${game.slug}')">
-                ${isFav ? '★' : '☆'}
-            </button>
-            <div class="card-thumb">
-                ${ICONS[game.iconKey] || ICONS.arcade}
-            </div>
-            <div class="card-body">
-                <div class="card-title">${game.title}</div>
-                <div class="card-category">${game.category}</div>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
-}
-
-async function playGame(game) {
-    document.getElementById("player-title").textContent = game.title;
-    const overlay = document.getElementById("player-overlay");
-    const frame = document.getElementById("game-frame");
+function launchGame(gameType) {
+    document.getElementById('gameModal').classList.add('active');
+    if (currentGameLoop) clearInterval(currentGameLoop);
     
-    overlay.classList.add("open");
-    frame.src = "about:blank";
-
-    let loaded = false;
-    for (let url of game.urls) {
-        try {
-            const resp = await fetch(url, { method: 'GET' });
-            if (resp.ok) {
-                let html = await resp.text();
-                const baseUrl = url.substring(0, url.lastIndexOf('/') + 1);
-                
-                // Inject base tag directly into source to resolve canvas engine black screens
-                if (!html.includes('<base')) {
-                    html = html.replace('<head>', `<head><base href="${baseUrl}">`);
-                }
-                
-                frame.srcdoc = html;
-                loaded = true;
-                break;
-            }
-        } catch (e) {
-            console.warn(`Mirror retry for ${game.title}`);
-        }
+    if (gameType === 'snake') {
+        document.getElementById('modalTitle').textContent = 'Classic Snake';
+        runSnake();
+    } else if (gameType === 'pong') {
+        document.getElementById('modalTitle').textContent = 'Pong Solo';
+        runPong();
     }
-
-    if (!loaded) {
-        frame.srcdoc = "";
-        frame.src = game.urls[0];
-    }
-
-    setTimeout(() => {
-        if (frame.contentWindow) frame.contentWindow.focus();
-    }, 200);
 }
 
 function closeGame() {
-    const overlay = document.getElementById("player-overlay");
-    const frame = document.getElementById("game-frame");
-    overlay.classList.remove("open");
-    frame.src = "about:blank";
-    frame.srcdoc = "";
+    document.getElementById('gameModal').classList.remove('active');
+    if (currentGameLoop) clearInterval(currentGameLoop);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function toggleFullscreen() {
-    const frame = document.getElementById("game-frame");
-    if (frame.requestFullscreen) frame.requestFullscreen();
-    else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
-}
-
-function setCategory(cat, btn) {
-    currentCategory = cat;
-    document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    displayGames();
-}
-
-function toggleFavorite(slug) {
-    if (favorites.includes(slug)) favorites = favorites.filter(s => s !== slug);
-    else favorites.push(slug);
-    localStorage.setItem("winyates-favs", JSON.stringify(favorites));
-    displayGames();
-}
-
-function openSettings() { document.getElementById("settings-modal").classList.add("open"); }
-function closeSettings(e) { 
-    if (!e || e.target === document.getElementById("settings-modal")) {
-        document.getElementById("settings-modal").classList.remove("open"); 
+// --- SNAKE GAME ENGINE ---
+function runSnake() {
+    const gridSize = 20;
+    const tileCountX = canvas.width / gridSize;
+    const tileCountY = canvas.height / gridSize;
+    
+    let snake = [{x: 10, y: 10}];
+    let food = {x: 15, y: 10};
+    let dx = 1, dy = 0;
+    
+    function handleInput(e) {
+        if (e.key === 'ArrowUp' && dy === 0) { dx = 0; dy = -1; }
+        if (e.key === 'ArrowDown' && dy === 0) { dx = 0; dy = 1; }
+        if (e.key === 'ArrowLeft' && dx === 0) { dx = -1; dy = 0; }
+        if (e.key === 'ArrowRight' && dx === 0) { dx = 1; dy = 0; }
     }
+    
+    document.addEventListener('keydown', handleInput);
+    
+    currentGameLoop = setInterval(() => {
+        const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+        
+        // Wall Collision
+        if (head.x < 0 || head.x >= tileCountX || head.y < 0 || head.y >= tileCountY) {
+            snake = [{x: 10, y: 10}];
+            dx = 1; dy = 0;
+            return;
+        }
+        
+        // Self Collision
+        for (let segment of snake) {
+            if (head.x === segment.x && head.y === segment.y) {
+                snake = [{x: 10, y: 10}];
+                dx = 1; dy = 0;
+                return;
+            }
+        }
+        
+        snake.unshift(head);
+        
+        // Food Collision
+        if (head.x === food.x && head.y === food.y) {
+            food = {
+                x: Math.floor(Math.random() * tileCountX),
+                y: Math.floor(Math.random() * tileCountY)
+            };
+        } else {
+            snake.pop();
+        }
+        
+        // Render
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#ef4444';
+        ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+        
+        ctx.fillStyle = '#22c55e';
+        for (let segment of snake) {
+            ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+        }
+    }, 100);
 }
 
-function toggleTheme() { document.body.classList.toggle("light"); }
-
-let fpsActive = false, frameCount = 0, lastTime = performance.now();
-function toggleFPS() {
-    fpsActive = !fpsActive;
-    const el = document.getElementById("fps-counter");
-    el.style.display = fpsActive ? "block" : "none";
-    if (fpsActive) requestAnimationFrame(calcFPS);
+// --- PONG GAME ENGINE ---
+function runPong() {
+    let paddleY = canvas.height / 2 - 40;
+    const paddleHeight = 80;
+    const paddleWidth = 10;
+    
+    let ballX = canvas.width / 2;
+    let ballY = canvas.height / 2;
+    let ballSpeedX = 4;
+    let ballSpeedY = 4;
+    
+    function handleMouseMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        paddleY = e.clientY - rect.top - paddleHeight / 2;
+    }
+    
+    canvas.addEventListener('mousemove', handleMouseMove);
+    
+    currentGameLoop = setInterval(() => {
+        ballX += ballSpeedX;
+        ballY += ballSpeedY;
+        
+        // Top/Bottom bounce
+        if (ballY <= 0 || ballY >= canvas.height) ballSpeedY = -ballSpeedY;
+        
+        // Right wall bounce
+        if (ballX >= canvas.width) ballSpeedX = -ballSpeedX;
+        
+        // Paddle collision
+        if (ballX <= paddleWidth + 10 && ballY >= paddleY && ballY <= paddleY + paddleHeight) {
+            ballSpeedX = -ballSpeedX;
+        }
+        
+        // Miss (Reset)
+        if (ballX <= 0) {
+            ballX = canvas.width / 2;
+            ballY = canvas.height / 2;
+            ballSpeedX = 4;
+        }
+        
+        // Render
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#3b82f6';
+        ctx.fillRect(10, paddleY, paddleWidth, paddleHeight);
+        
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(ballX, ballY, 8, 0, Math.PI * 2);
+        ctx.fill();
+    }, 1000 / 60);
 }
-
-function calcFPS(now) {
-    if (!fpsActive) return;
-    frameCount++;
-    if (now - lastTime >= 1000) {
-        document.getElementById("fps-val").textContent = frameCount;
-        frameCount = 0;
-        lastTime = now;
-    }
-    requestAnimationFrame(calcFPS);
-}
-
-document.getElementById("search-input").addEventListener("input", displayGames);
-
-document.addEventListener("keydown", (e) => {
-    if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
-        e.preventDefault();
-        document.getElementById("search-input").focus();
-    }
-    if (e.key === "Escape") {
-        closeGame();
-        closeSettings();
-    }
-});
-
-buildGameCatalog();
-displayGames();
 </script>
 </body>
 </html>
